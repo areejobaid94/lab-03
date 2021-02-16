@@ -13,53 +13,61 @@
 
 <body>
   <header>
-    <h1 id = 'hader'>The Gallery of Horns</h1>
-    <div class = 'header-cont'> 
+    <h1 id='hader'>The Gallery of Horns</h1>
+    <div class='header-cont'>
       <h2>Select By Keyword:</h2>
-      <select id = 'select' >
-        <option value="default">Filter by Keyword</option>
+      <select id='select'>
+        <option value="default">All</option>
       </select>
     </div>
-    <div class = 'header-cont'>
+    <div class='header-cont'>
       <h2>Sort By:</h2>
-      <select id = 'sort-by'>
-        <option value="default">Sort By</option> 
+      <select id='sort-by'>
+        <option value="default">Sort By</option>
         <option value="keyword">keyword</option>
         <option value="title">Title</option>
-        <option value="horns">Horns</option>    
+        <option value="horns">Horns</option>
       </select>
     </div>
-    <div class = 'header-cont'>
+    <div class='header-cont'>
       <h2>
         Quick Sort
       </h2>
-      <button id = 'quick-sort-title' >Sort By Title</button>
-      <button id = 'quick-sort-horns'>Sort By Horns</button>
+      <button id='quick-sort-title'>Sort By Title</button>
+      <button id='quick-sort-horns'>Sort By Horns</button>
     </div>
-    <div class = 'header-cont'>
+    <div class='header-cont'>
       <h2>
         Pages
       </h2>
-      <button id = 'switch-first-page' >First Page</button>
-      <button id = 'switch-second-page'>Second Page</button>
+      <button id='switch-first-page'>First Page</button>
+      <button id='switch-second-page'>Second Page</button>
     </div>
   </header>
   <main>
-    <section id="photo-template" >
+    <section id="photo-template">
       <h2></h2>
       <img src="" alt="">
       <h3></h3>
       <h4 class="horns"></h4>
       <h4 class="keyword"></h4>
     </section>
-    <div id = 'allFirItems'>
+    <div id='allFirItems'>
     </div>
-    <template id="allSenItems" type="text/x-tmpl-mustache">
+    <div>
+      <template id="allSenItems" type="text/x-tmpl-mustache">
+        <div class="card-2nd">
         <h2>{{title}}</h2>
         <img src={{image_url}}>
         <h3>{{description}}</h3>
+        <h4 class="horns">{{horns}}</h4>
+        <h4 class="keyword">{{keyword}}</h4>
+        </div>
+      </template>
+      <div id = 'senContent'>
+
       </div>
-    </template>
+    </div>
   </main>
   <footer>
     contact as: areej.obaid@yahoo.com

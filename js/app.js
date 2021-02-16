@@ -9,6 +9,7 @@ let selectedSort;
 let isFirst = true;
 let id = 'allFirItems';
 let addingToSen =false;
+let sellectedButId = '#switch-first-page';
 
 function card(ele) {
     this.keyword = ele.keyword;
@@ -33,7 +34,6 @@ card.prototype.render = function () {
 
 card.prototype.renderSen = function () {
     let template = $("#allSenItems").html();
-    console.log(template);
     return Mustache.render(template,this);
 }
 
@@ -46,19 +46,21 @@ $(document).ready(() => {
         selectedArr = allArr.slice();
         selectedSort = 'title';
         sortBy();
+        appendAllSelecters(allArr);
+        $('#switch-first-page').css('color', 'red');
     });
+
     $.ajax({ url: "data/page-2.json", dataType: 'json' }).then(function (data) {
         data.forEach(ele => {
             addingToSen = true;
             new card(ele);
         });
-        console.log(allArrSen,'allArrSen')
     });
     $("#sort-by").val('title');
     $(`#quick-sort-title`).css('color', 'red');
     $('#select').on('change', function (e) {
         selectedKey = this.value;
-        updateSelectedArr(selectedKey)
+        updateSelectedArr(selectedKey);
         sortBy();
     });
 
@@ -69,6 +71,7 @@ $(document).ready(() => {
             $('button').css('color', 'gray');
             $(`#quick-sort-${selectedSort}`).css('color', 'red');
         }
+        $(sellectedButId).css('color', 'red');
     });
     $('#quick-sort-horns').on('click', function (e) {
         e.preventDefault();
@@ -92,28 +95,45 @@ $(document).ready(() => {
     $('#switch-first-page').on('click', function (e) {
         e.preventDefault();
         id = 'allFirItems';
+        $('#senContent').empty();
+        $('#allFirItems').empty();
+        selectedKey = 'default';
+        selectedSort = 'title';
+        $('#quick-sort-title').css('color', 'red');
+        $('#quick-sort-horns').css('color', 'gray');
         updateSelectedArr(selectedKey);
         $('#switch-second-page').css('color', 'gray');
         $(this).css('color', 'red');
-        $('#allFirItems').show();
-        $('#switch-first-page').hide();
+        sortBy();
+        appendAllSelecters(allArr);
+        $("#sort-by").val('title');
+        sellectedButId = '#switch-first-page';
     })
 
     $('#switch-second-page').on('click', function (e) {
         e.preventDefault();
         id = 'allSenItems';
+        selectedKey = 'default';
         selectedSort = 'title';
+        $('#quick-sort-title').css('color', 'red');
+        $('#quick-sort-horns').css('color', 'gray');
+        updateSelectedArr(selectedKey);
         $('#switch-first-page').css('color', 'gray');
         $(this).css('color', 'red');
-        $('#switch-first-page').show();
-        $('#allFirItems').hide();
-        console.log(selectedArr)
-        allArrSen.forEach(ele =>{
-            $('main').append(ele.renderSen());
-        })
-        
+        $('#senContent').empty();
+        $('#allFirItems').empty();
+        sortBy();
+        appendAllSelecters(allArrSen)
+        arr = [];
+        // selectedArr.forEach(ele =>{
+        //     console.log('hi');
+        //     $('#senContent').append(ele.renderSen());
+        // })
+        $("#sort-by").val('title');
+        sellectedButId = '#switch-second-page';
     })
 })
+
 
 card.prototype.appendSelector = function () {
     $("#select").append(new Option(this.keyword, this.keyword));
@@ -123,7 +143,11 @@ function sortBy() {
     if (selectedSort != undefined || selectedSort != 'default') {
         selectedArr = selectedArr.sort((a, b) => (a[selectedSort] > b[selectedSort]) ? 1 : (a[selectedSort] === b[selectedSort]) ? ((a[selectedSort] > b[selectedSort]) ? 1 : -1) : -1)
     }
-    showAll(selectedArr, true);
+    if(id == 'allFirItems'){
+        showAll(selectedArr, true);
+    }else{
+        showAllSend(selectedArr, true);
+    }
 }
 
 function showAll(selArr, isNotFirstTime) {
@@ -131,16 +155,32 @@ function showAll(selArr, isNotFirstTime) {
     selArr.forEach(element => {
         let newCard;
         isNotFirstTime == false ? newCard = new card(element) : newCard = element;
-        if (arr.includes(newCard.keyword) == false) {
-            arr.push(newCard.keyword);
-            newCard.appendSelector();
-        }
         newCard.render();
     });
 }
 
+function showAllSend(){
+    $('#senContent').empty();
+    selectedArr.forEach(ele =>{
+        $('#senContent').append(ele.renderSen());
+    })
+}
+function appendAllSelecters(allArray){
+    arr = [];
+    $("#select").empty();
+    $("#select").append(new Option('All', 'default'));
+    allArray.forEach(ele =>{
+        if (arr.includes(ele.keyword) == false) {
+            arr.push(ele.keyword);
+            ele.appendSelector();
+        }
+    })
+}
 function updateSelectedArr(val) {
-    let locArr = id == 'allFirItems'? allArr : allArrSen;
+    let locArr = allArr;
+    if(id != 'allFirItems'){
+        locArr =allArrSen
+    }
     if (val != undefined && val != 'default') {
         selectedArr = [];
         locArr.forEach(ele => {
@@ -149,7 +189,6 @@ function updateSelectedArr(val) {
             }
         });
     }else{
-        locArr = allArr.slice();
+        selectedArr = locArr.slice();
     }
-    console.log(selectedArr)
 }
