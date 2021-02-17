@@ -14,34 +14,36 @@
 <body>
   <header>
     <h1 id='hader'>The Gallery of Horns</h1>
-    <div class='header-cont'>
-      <h2>Select By Keyword:</h2>
-      <select id='select'>
-        <option value="default">All</option>
-      </select>
-    </div>
-    <div class='header-cont'>
-      <h2>Sort By:</h2>
-      <select id='sort-by'>
-        <option value="default">Sort By</option>
-        <option value="keyword">keyword</option>
-        <option value="title">Title</option>
-        <option value="horns">Horns</option>
-      </select>
-    </div>
-    <div class='header-cont'>
-      <h2>
-        Quick Sort
-      </h2>
-      <button id='quick-sort-title'>Sort By Title</button>
-      <button id='quick-sort-horns'>Sort By Horns</button>
-    </div>
-    <div class='header-cont'>
-      <h2>
-        Pages
-      </h2>
-      <button id='switch-first-page'>First Page</button>
-      <button id='switch-second-page'>Second Page</button>
+    <div id = 'header-content'>
+      <div class='header-cont'>
+        <h2>Select By Keyword:</h2>
+        <select id='select'>
+          <option value="default">All</option>
+        </select>
+      </div>
+      <div class='header-cont'>
+        <h2>Sort By:</h2>
+        <select id='sort-by'>
+          <option value="default">Sort By</option>
+          <option value="keyword">keyword</option>
+          <option value="title">Title</option>
+          <option value="horns">Horns</option>
+        </select>
+      </div>
+      <div class='header-cont'>
+        <h2>
+          Quick Sort
+        </h2>
+        <button id='quick-sort-title'>Sort By Title</button>
+        <button id='quick-sort-horns'>Sort By Horns</button>
+      </div>
+      <div class='header-cont'>
+        <h2>
+          Pages
+        </h2>
+        <button id='switch-first-page'>First Page</button>
+        <button id='switch-second-page'>Second Page</button>
+      </div>
     </div>
   </header>
   <main>
@@ -56,12 +58,12 @@
     </div>
     <div>
       <template id="allSenItems" type="text/x-tmpl-mustache">
-        <div class="card-2nd">
+        <div class="card">
         <h2>{{title}}</h2>
         <img src={{image_url}}>
-        <h3>{{description}}</h3>
-        <h4 class="horns">{{horns}}</h4>
-        <h4 class="keyword">{{keyword}}</h4>
+        <h3>Description: {{description}}</h3>
+        <h4 class="horns">Horns: {{horns}}</h4>
+        <h4 class="keyword">Keyword: {{keyword}}</h4>
         </div>
       </template>
       <div id = 'senContent'>
@@ -69,9 +71,6 @@
       </div>
     </div>
   </main>
-  <footer>
-    contact as: areej.obaid@yahoo.com
-  </footer>
   <script src="https://unpkg.com/mustache@latest"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="js/app.js"></script>
