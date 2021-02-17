@@ -1,25 +1,28 @@
 .card {
     box-shadow: 0 4px 8px 0 rgba(0.2,0.2,0.2,0.4);
     transition: 0.3s;
-    width: 20%;
-    height: 470px;
+    width: 90%;
+    height: 480px;
     text-align: center;
     float: left;
-    padding: 1%;
     margin: 1.5%;
+    justify-self: center;
+    background-color: white;
 }
-  
-.card, .card-2nd :hover {
+
+
+.card :hover {
     box-shadow: 0 8px 16px 0 rgba(0.8,0.5,0.5,0.8);
 }
 img{
-    width: 200px;
-    height: 200px;
+    width: 60%;
+    height: 40%;
 }
 
 main{
     height: 2700px;
-    padding: 2%;
+    background-color: #DCDCDC;
+    padding-top: 20px;
 }
 
 .hide {
@@ -33,39 +36,77 @@ main{
 }
 header{
     text-align: center;
-    padding: 2%;
     margin-bottom: 5%;
 }
+
+
 .header-cont{
-    float: left;
-    width: 20%;
     margin-left: 2%;
-    text-align: center;
+    justify-self: center;
 }
 button{
     color: gray;
 }
-footer{
+
+
+#allFirItems,#senContent {
     width: 100%;
-    color: white;
-    text-align: center;
-    background-color: gray;
-    height: 70px;
-    margin-bottom: 0px;
-    padding: 1%;
+    display: grid;
+    grid-template-columns:  auto auto auto auto;
+    align-content: center;
+    grid-row-gap:15px;
 }
 
-.card-2nd{
-    box-shadow: 0 4px 8px 0 rgba(0.2,0.2,0.2,0.4);
-    transition: 0.3s;
-    width: 20%;
-    height: 470px;
-    text-align: center;
-    padding: 1%;
-    margin: 1.5%;
+#header-content{
+    display: grid;
+    grid-template-columns:  auto auto auto auto;
 }
 
-#senContent{
-    display: flex;
-    flex-wrap: wrap;
+@media only screen   
+and (min-device-width : 641px)   
+and (max-device-width : 1024px) { 
+#allFirItems,#senContent {
+    width: 100%;
+    display: grid;
+    grid-template-columns:  auto auto;
+    align-content: center;
+    grid-row-gap:15px;
 }
+
+#header-content{
+    display: grid;
+    grid-template-columns:  auto auto;
+}
+main{
+    background-color: #FFDEAD;
+}
+
+}  
+
+@media only screen      
+and (max-device-width : 640px)  
+{
+    #allFirItems,#senContent {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-row-gap:15px;
+    }
+    #header-content{
+        display: grid;
+        grid-template-columns:  auto;
+    }
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0.2,0.2,0.2,0.4);
+        transition: 0.3s;
+        width: 80%;
+        height: 480px;
+        text-align: center;
+        float: left;
+        margin: 1.5%;
+        justify-self: center;
+    }
+    main{
+        background-color: #F0F8FF;
+    }
+} 
